@@ -11,7 +11,6 @@ import javax.validation.constraints.Pattern;
  * Represents employee entity.
  */
 @Data
-@Where(clause = "deleted = 0")
 @Entity
 @Builder
 @ToString(exclude = "department")

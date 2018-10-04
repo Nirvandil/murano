@@ -38,7 +38,7 @@ public class DefaultEmployeeService implements EmployeeService {
     @Transactional(readOnly = true)
     public List<EmployeeDTO> findAllEmployees() {
         log.debug("Requesting database for all employees list.");
-        return employeeRepo.findAll().stream()
+        return employeeRepo.findAllNotDeleted().stream()
                 .map(this::toDto)
                 .collect(toList());
     }
@@ -57,7 +57,7 @@ public class DefaultEmployeeService implements EmployeeService {
     @Transactional(readOnly = true)
     public List<EmployeeDTO> findEmployeesInDepartment(final Long departmentId) {
         log.debug("Requesting database for employees in department {}.", departmentId);
-        return employeeRepo.findAllByDepartment_Id(departmentId)
+        return employeeRepo.findAllNotDeletedInDepartment(departmentId)
                 .stream()
                 .map(this::toDto)
                 .collect(toList());

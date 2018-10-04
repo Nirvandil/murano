@@ -22,6 +22,9 @@ public class Department {
     @Column(nullable = false)
     private String name;
 
+    @Column(columnDefinition = "BOOLEAN DEFAULT FALSE", nullable = false)
+    private boolean deleted = false;
+
     @OneToMany(mappedBy = "department")
     private Set<Employee> employees;
 

@@ -1,11 +1,13 @@
 package cf.sukharev.murano;
 
+import cf.sukharev.murano.repo.custom.DeleteAwareBaseRepositoryImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 import org.springframework.ws.server.EndpointInterceptor;
@@ -18,6 +20,7 @@ import org.springframework.xml.xsd.XsdSchema;
 import java.util.List;
 
 @EnableWs
+@EnableJpaRepositories(repositoryBaseClass = DeleteAwareBaseRepositoryImpl.class)
 @SpringBootApplication
 public class MuranoApplication extends WsConfigurerAdapter {
     public static final String MURANO_NAMESPACE = "https://muranosoft.com/test";
