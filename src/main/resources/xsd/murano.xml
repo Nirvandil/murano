@@ -1,0 +1,95 @@
+<xs:schema targetNamespace="https://muranosoft.com/test" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="https://muranosoft.com/test">
+    <xs:element name="ListEmployeesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:long" name="departmentId" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ListEmployeesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employee" type="tns:employeeDTO" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="CreateEmployeeRequest" type="tns:employeeDTO">
+    </xs:element>
+
+
+    <xs:element name="CreateEmployeeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:long" name="employeeId"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="DeleteEmployeeRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:long" name="employeeId"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="employeeDTO">
+        <xs:sequence>
+            <xs:element name="id" type="xs:unsignedInt" minOccurs="0"/>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="phone">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="\(\d{3}\)-\d{3}-\d{2}-\d{2}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="departmentId" type="xs:unsignedInt" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="ChangeEmployeeDepartmentRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:long" name="employeeId"/>
+                <xs:element type="xs:long" name="newDepartmentId"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="RemoveEmployeeFromDepartmentRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:long" name="employeeId"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="UpdateEmployeeRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:long" name="employeeId"/>
+                <xs:element name="fields">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="firstName" minOccurs="0"/>
+                            <xs:element type="xs:string" name="lastName" minOccurs="0"/>
+                            <xs:element name="phone" minOccurs="0">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:pattern value="\(\d{3}\)-\d{3}-\d{2}-\d{2}"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
